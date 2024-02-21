@@ -3,8 +3,11 @@ function getLocation(req, res) {
 }
 
 function updateLocation(req, res) {
-  res.send("Location Update successfully");
+  let location = req.body;
+  console.log(req.body);
+  res.json({ status: "Successful" });
 }
+
 function track(req, res) {
   res.render("tracker");
 }

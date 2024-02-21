@@ -84,18 +84,73 @@
     </div>
 </body>
 
+<script>
+</script>
 
 <script>
 
-    const SERVER_URL = "192.x.x.x";
 
-    setInterval(() => {
+    const SERVER_URL = "http://192.168.0.105:5000/tracker/"
+    // const SERVER_URL = "http://localhost:5000/tracker/";
 
-        // Get the location 
-        //  write js for AjAX 
-        console.log(SERVER_URL);
+    async function makePatchRequest(currentLocation) {
+        try {
+            const response = await fetch(SERVER_URL, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(currentLocation)
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            console.log('PATCH request successful:', data);
+        } catch (error) {
+            console.error('There was a problem with the PATCH request:', error);
+        }
+    }
 
-    }, 2000);
+    function getLocation() {
+
+        // Check if Geolocation is supported by the browser
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    // Log latitude and longitude to the console
+                    const currentLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    }
+                    console.log("x: " + currentLocation.latitude + "  y: " + currentLocation.longitude);
+                    makePatchRequest(currentLocation);
+                },
+                function (error) {
+                    // Handle errors
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            makePatchRequest({ demoX: 45, demoY: 47 });
+                            console.error("User denied the request for Geolocation.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            console.error("Location information is unavailable.");
+                            break;
+                        case error.TIMEOUT:
+                            console.error("The request to get user location timed out.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            console.error("An unknown error occurred.");
+                            break;
+                    }
+                }
+            );
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    getLocation()
+    setInterval(getLocation, 2000);
 
 </script>
 
