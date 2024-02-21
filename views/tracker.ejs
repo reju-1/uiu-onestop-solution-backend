@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Changing Shiny Loader</title>
+</head>
+<style>
+    * {
+        font-family: "arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+    }
+
+    .wrapper .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        animation: anim 2s linear infinite;
+    }
+
+    @keyframes anim {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+            box-shadow: 1px 5px 2px #e65c00;
+        }
+
+        50% {
+            transform: translate(-50%, -50%) rotate(180deg);
+            box-shadow: 1px 5px 2px #18b201;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+            box-shadow: 1px 5px 2px #0456c8;
+        }
+    }
+
+    .wrapper .loader::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .wrapper span {
+        color: #737373;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 200px;
+        animation: textAnim 3s ease-in-out infinite;
+    }
+
+    @keyframes textAnim {
+        50% {
+            color: black;
+        }
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="loader"></div>
+        <span>Sending...</span>
+    </div>
+</body>
+
+
+<script>
+
+    const SERVER_URL = "192.x.x.x";
+
+    setInterval(() => {
+
+        // Get the location 
+        //  write js for AjAX 
+        console.log(SERVER_URL);
+
+    }, 2000);
+
+</script>
+
+</html>
