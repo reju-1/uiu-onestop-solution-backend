@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Question Paper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            color: #666;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            border: none;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .radio-group label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Upload Question Paper</h2>
+
+        <form action="/qb/upload" method="post" enctype="multipart/form-data">
+
+            <label for="name">Course Name:</label><br>
+            <input type="text" id="name" name="courseName" required><br>
+
+            <label for="courseId">Course ID:</label><br>
+            <input type="text" id="courseId" name="courseId" required><br>
+
+            <div class="radio-group">
+                <label for="trimester">Trimester:</label>
+                <input type="radio" id="fall" name="trimester" value="fall" required>
+                <label for="fall">Fall</label>
+
+                <input type="radio" id="summer" name="trimester" value="summer">
+                <label for="summer">Summer</label>
+
+                <input type="radio" id="spring" name="trimester" value="spring">
+                <label for="spring">Spring</label>
+            </div>
+
+            <div class="radio-group">
+                <label for="type">Type:</label>
+                <input type="radio" id="ct" name="type" value="ct" required>
+                <label for="ct">Class Test</label>
+
+                <input type="radio" id="mid" name="type" value="mid">
+                <label for="mid">Midterm</label>
+
+                <input type="radio" id="final" name="type" value="final">
+                <label for="final">Final</label>
+
+                <input type="radio" id="solution" name="type" value="solution">
+                <label for="solution">Solution</label>
+            </div>
+
+            <label for="year">Year:</label><br>
+            <input type="text" id="year" name="year" required><br>
+
+            <label for="department">Department:</label><br>
+            <select id="department" name="department" required>
+                <option value="cse">Computer Science and Engineering (CSE)</option>
+                <option value="eee">Electrical and Electronics Engineering (EEE)</option>
+                <option value="bba">Bachelor of Business Administration (BBA)</option>
+                <option value="others">Others</option>
+            </select><br>
+
+            <label for="pdfFile">Upload PDF:</label><br>
+            <input type="file" id="pdfFile" name="pdfFile" accept="application/pdf" required><br>
+
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+
+</html>

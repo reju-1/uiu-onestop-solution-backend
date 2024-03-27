@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 
 // Routing imports
 import trackingRouter from "./routers/trackingRouter.js";
+import questionBank from "./routers/questionBank.js";
 
 // External imports
 import { commonErrorHandler, notFoundHandler } from "./middlewares/errors.js";
@@ -37,7 +38,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // Routing setup
 app.use("/tracker", trackingRouter);
 // app.use("/library", "xx");
-// app.use("/qb", "aa");
+app.use("/qb", questionBank);
 // app.use("/newsletter", "news");
 
 // 404 & common error handler
