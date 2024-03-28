@@ -6,6 +6,7 @@ async function handleUpload(req, res) {
 
     console.log(req.file);
     console.log(req.body);
+    console.log(req.hash);
 
     res.json({ message: "File uploaded successfully" });
   } catch (error) {

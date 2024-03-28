@@ -4,10 +4,11 @@ import { handleUpload } from "../controllers/qbController.js";
 
 // External imports
 import fileUpload from "../middlewares/qb/uploadQuestion.js";
+import generateHash from "../middlewares/qb/generateHash.js";
 
 const router = express.Router();
 router.get("/", (req, res) => res.render("uploadQ"));
 
-router.post("/upload", fileUpload, handleUpload);
+router.post("/upload", fileUpload, generateHash, handleUpload);
 
 export default router;
