@@ -1,6 +1,6 @@
 import express from "express";
 // controller functions
-import { handleUpload } from "../controllers/qbController.js";
+import { handleUpload } from "../controllers/qb/qbController.js";
 
 // External imports
 import fileUpload from "../middlewares/qb/uploadQuestion.js";
