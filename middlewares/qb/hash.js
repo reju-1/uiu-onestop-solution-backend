@@ -1,7 +1,7 @@
 import fs from "fs";
 import crypto from "crypto";
 
-function generateHash(req, res, next) {
+function calculateHash(req, res, next) {
   const filePath = req.file?.path;
 
   try {
@@ -32,4 +32,8 @@ function generateHash(req, res, next) {
   }
 }
 
-export default generateHash;
+async function compareHash(req, res, next) {
+  next();
+}
+
+export { calculateHash, compareHash };
