@@ -10,12 +10,11 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     //Order is important if file is the first field the req.body will be empty
     // console.log(req.body);
-    const { courseName, courseId, trimester, type, year, department } = req.body;
-    let fileName =
-      `${courseName}-${courseId}-${type}-${trimester}-${year}-${department}`
-        .toLowerCase()
-        .split(" ")
-        .join("-");
+    const { course, type, year, department } = req.body;
+    let fileName = `${course}-${type}-${year}-${department}`
+      .toLowerCase()
+      .split(" ")
+      .join("-");
     fileName = fileName + "-" + Date.now() + path.extname(file.originalname);
 
     cb(null, fileName);
