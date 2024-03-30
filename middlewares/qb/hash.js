@@ -1,6 +1,9 @@
 import fs from "fs";
 import crypto from "crypto";
 
+// external imports
+import Question from "../../models/question.js";
+
 function calculateHash(req, res, next) {
   const filePath = req.file?.path;
 
@@ -33,7 +36,28 @@ function calculateHash(req, res, next) {
 }
 
 async function compareHash(req, res, next) {
-  next();
+  try {
+    const found = await Question.findOne({ hash: req.hash });
+
+    if (found) {
+      const fileUrl = `public/uploads/${req.file.filename}`;
+      // console.log(req.file.path); //due to security this is not used
+
+      fs.unlink(fileUrl, (err) => {
+        if (err) {
+          console.error("Error deleting file:", err);
+          return;
+        }
+      });
+
+      next("The Question is already exit in our Database");
+    } else {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
+    next("Error occurred while comparing Hash");
+  }
 }
 
 export { calculateHash, compareHash };
