@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
 // Routing imports
+import userRouter from "./routers/userRouter.js";
 import trackingRouter from "./routers/trackingRouter.js";
 import questionBank from "./routers/questionBank.js";
 
@@ -36,6 +37,7 @@ app.use(express.static(path.resolve("public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Routing setup
+app.use("/user", userRouter);
 app.use("/tracker", trackingRouter);
 // app.use("/library", "xx");
 app.use("/qb", questionBank);
