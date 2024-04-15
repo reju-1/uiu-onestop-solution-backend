@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import Person from "../../models/person.js";
+import transporter from "../../utilities/mailer.js";
 
 async function signUp(req, res) {
   try {
@@ -19,6 +20,33 @@ async function signUp(req, res) {
     await newPerson.save();
 
     //------------ Send email-------------
+
+    const token = jwt.sign(
+      {
+        userId: newPerson._id,
+        email: newPerson.email,
+        type: "Email verification",
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    let mailOptions = {
+      from: process.env.EMAIL_AC,
+      to: newPerson.email,
+      subject: "Verify Your Email with UIU Solutions",
+      text: `Click the link to verify you email \n ${process.env.SERVER_URL}user/verify/${token}`,
+    };
+
+    //await transporter.sendMail(mailOptions); // this is too slow
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        // console.log("Email sent: " + info.response);
+      }
+    });
 
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
@@ -66,6 +94,7 @@ async function logIn(req, res) {
 }
 
 async function verifyEmail(req, res) {
+  console.log("Token: ", req.params.token);
   res.status(200).json({ status: "Success" });
 }
 

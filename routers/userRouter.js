@@ -12,6 +12,6 @@ import {
 const router = express.Router();
 router.post("/signup", signUp);
 router.post("/login", logIn);
-router.post("/verify", verifyEmail);
+router.get("/verify/:token", verifyEmail);
 
 export default router;
