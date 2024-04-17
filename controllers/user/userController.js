@@ -25,7 +25,7 @@ async function signUp(req, res) {
       {
         userId: newPerson._id,
         email: newPerson.email,
-        type: "Email verification",
+        type: "email-verification",
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -35,7 +35,7 @@ async function signUp(req, res) {
       from: process.env.EMAIL_AC,
       to: newPerson.email,
       subject: "Verify Your Email with UIU Solutions",
-      text: `Click the link to verify you email \n ${process.env.SERVER_URL}user/verify/${token}`,
+      text: `Click the link to verify you email \n ${process.env.SERVER_URL}/user/verify/${token}`,
     };
 
     //await transporter.sendMail(mailOptions); // this is too slow
@@ -94,8 +94,31 @@ async function logIn(req, res) {
 }
 
 async function verifyEmail(req, res) {
-  console.log("Token: ", req.params.token);
-  res.status(200).json({ status: "Success" });
+  const token = req.params.token;
+  try {
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+
+    if (decoded.type !== "email-verification") {
+      throw new Error("Invalid Token Type");
+    }
+
+    const updatedInfo = await Person.findOneAndUpdate(
+      { _id: decoded.userId },
+      { verified: true },
+      { new: true } // To return the updated document
+    );
+
+    if (!updatedInfo) {
+      throw new Error("No one found to update");
+    }
+
+    res.render("verificationStatus", { success: true });
+    // res.status(200).json({ message: "Email Verified Successfully" });
+  } catch (err) {
+    console.log(err);
+    res.render("verificationStatus", { success: false });
+    // return res.status(500).send({ message: "Failed to Authenticate Email." });
+  }
 }
 
 export { signUp, logIn, verifyEmail };
