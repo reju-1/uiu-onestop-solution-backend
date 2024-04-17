@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
+// configuration
+import configDir from "./utilities/configDir.js";
+
 // Routing imports
 import userRouter from "./routers/userRouter.js";
 import trackingRouter from "./routers/trackingRouter.js";
@@ -14,6 +17,10 @@ import { commonErrorHandler, notFoundHandler } from "./middlewares/errors.js";
 
 const app = express();
 dotenv.config();
+
+// Creating Necessary Directories
+configDir();
+console.log("Directories Created");
 
 // Database connection
 main().catch((err) => console.log(err));
@@ -48,5 +55,5 @@ app.use(notFoundHandler);
 app.use(commonErrorHandler);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running at http://localhost:${process.env.PORT}/`);
+  console.log(`Server is running at ${process.env.SERVER_URL}`);
 });
