@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routers/userRouter.js";
 import trackingRouter from "./routers/trackingRouter.js";
 import questionBank from "./routers/questionBank.js";
+import newsLetter from "./routers/newsLetter.js";
 
 // External imports
 import { commonErrorHandler, notFoundHandler } from "./middlewares/errors.js";
@@ -41,7 +42,7 @@ app.use("/user", userRouter);
 app.use("/tracker", trackingRouter);
 // app.use("/library", "xx");
 app.use("/qb", questionBank);
-// app.use("/newsletter", "news");
+app.use("/newsletter", newsLetter);
 
 // 404 & common error handler
 app.use(notFoundHandler);
