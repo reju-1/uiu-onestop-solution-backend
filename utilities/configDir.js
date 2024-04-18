@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
 
-//  Directories for Question-Bank, Books and Email-Attachment-Uploads
+//  Directories for Question-Bank, Books, Events and temp for Email-Attachment
 
 function configDir() {
-  const uploadDirs = ["qbs", "books", "emailUploads"];
+  const uploadDirs = ["qbs", "books", "events", "temp"];
 
   uploadDirs.forEach((dir) => {
     const dirPath = path.join("public/uploads", dir);

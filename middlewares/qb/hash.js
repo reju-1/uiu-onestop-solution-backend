@@ -40,7 +40,7 @@ async function compareHash(req, res, next) {
     const found = await Question.findOne({ hash: req.hash });
 
     if (found) {
-      const fileUrl = `public/uploads/${req.file.filename}`;
+      const fileUrl = `public/uploads/qbs/${req.file.filename}`;
       // console.log(req.file.path); //due to security this is not used
 
       fs.unlink(fileUrl, (err) => {
