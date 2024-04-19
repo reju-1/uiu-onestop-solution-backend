@@ -9,8 +9,10 @@ import configDir from "./utilities/configDir.js";
 
 // Routing imports
 import userRouter from "./routers/userRouter.js";
+import adminRouter from "./routers/adminRouter.js";
 import trackingRouter from "./routers/trackingRouter.js";
 import questionBank from "./routers/questionBank.js";
+import libraryRouter from "./routers/libraryRouter.js";
 import newsLetter from "./routers/newsLetter.js";
 
 // External imports
@@ -46,10 +48,13 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Routing setup
 app.use("/user", userRouter);
-app.use("/tracker", trackingRouter);
-// app.use("/library", "xx");
+app.use("/admin", adminRouter);
+
 app.use("/qb", questionBank);
+app.use("/library", libraryRouter);
+
 app.use("/newsletter", newsLetter);
+app.use("/tracker", trackingRouter);
 
 // 404 & common error handler
 app.use(notFoundHandler);
