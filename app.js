@@ -13,7 +13,6 @@ import adminRouter from "./routers/adminRouter.js";
 import trackingRouter from "./routers/trackingRouter.js";
 import questionBank from "./routers/questionBank.js";
 import libraryRouter from "./routers/libraryRouter.js";
-import newsLetter from "./routers/newsLetter.js";
 
 // External imports
 import { commonErrorHandler, notFoundHandler } from "./middlewares/errors.js";
@@ -53,7 +52,6 @@ app.use("/admin", adminRouter);
 app.use("/qb", questionBank);
 app.use("/library", libraryRouter);
 
-app.use("/newsletter", newsLetter);
 app.use("/tracker", trackingRouter);
 
 // 404 & common error handler

@@ -4,13 +4,15 @@ async function sendNewsLetter(req, res) {
   const { subject, content, category } = req.body;
   const files = req.files;
 
-  let attachmentObject = files.map(({ filename, path, mimetype }) => {
-    return {
+  let attachmentObject = [];
+
+  if (files) {
+    attachmentObject = files.map(({ filename, path, mimetype }) => ({
       filename: filename,
       path: path,
       contentType: mimetype,
-    };
-  });
+    }));
+  }
 
   let mailOptions = {
     from: process.env.EMAIL_AC,
@@ -30,4 +32,4 @@ async function sendNewsLetter(req, res) {
   res.json({ message: "Email send successfully" });
 }
 
-export { sendNewsLetter };
+export default sendNewsLetter;

@@ -1,3 +1,5 @@
+import sendNewsLetter from "./sendNewsLetter.js";
+
 async function signup(req, res) {
   res.send("signup");
 }
@@ -20,10 +22,6 @@ async function getReports(req, res) {
 
 async function bookUpload(req, res) {
   res.send("Book uploaded!");
-}
-
-async function sendNewsLetter(req, res) {
-  res.send("newsLetter send");
 }
 
 export {

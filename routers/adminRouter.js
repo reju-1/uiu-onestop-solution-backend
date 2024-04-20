@@ -12,7 +12,7 @@ import {
 } from "../controllers/admin/adminController.js";
 
 // External imports
-// import x from "x";
+import configureMulter from "../middlewares/multerMiddleware.js";
 
 const router = express.Router();
 
@@ -24,7 +24,13 @@ router.patch("/review-qb", finalizeQuestion);
 
 router.get("/report-qb", getReports);
 
-router.post("/newsletter", sendNewsLetter);
+router.post(
+  "/newsletter",
+  configureMulter("public/uploads/temp").array("files"),
+  sendNewsLetter
+);
+router.get("/newsletter", (req, res) => res.render("newsLetter"));
+
 router.post("/book-upload", bookUpload);
 
 export default router;
