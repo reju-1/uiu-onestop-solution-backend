@@ -1,3 +1,4 @@
+import bookUpload from "./bookUpload.js";
 import sendNewsLetter from "./sendNewsLetter.js";
 
 async function signup(req, res) {
@@ -18,10 +19,6 @@ async function finalizeQuestion(req, res) {
 
 async function getReports(req, res) {
   res.send("report * this question is fuzzy");
-}
-
-async function bookUpload(req, res) {
-  res.send("Book uploaded!");
 }
 
 export {

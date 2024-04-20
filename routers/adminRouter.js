@@ -31,6 +31,13 @@ router.post(
 );
 router.get("/newsletter", (req, res) => res.render("newsLetter"));
 
-router.post("/book-upload", bookUpload);
+router.post(
+  "/book-upload",
+  configureMulter("public/uploads/books").fields([
+    { name: "logo", maxCount: 1 },
+    { name: "book", maxCount: 1 },
+  ]),
+  bookUpload
+);
 
 export default router;
