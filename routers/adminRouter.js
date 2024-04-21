@@ -9,6 +9,9 @@ import {
   getReports,
   bookUpload,
   sendNewsLetter,
+  uploadEvent,
+  getEvents,
+  getEventByID,
 } from "../controllers/admin/adminController.js";
 
 // External imports
@@ -39,5 +42,13 @@ router.post(
   ]),
   bookUpload
 );
+
+router.post(
+  "/event",
+  configureMulter("public/uploads/events").single("logo"),
+  uploadEvent
+);
+router.get("/event", getEvents);
+router.get("/event/:id", getEventByID);
 
 export default router;

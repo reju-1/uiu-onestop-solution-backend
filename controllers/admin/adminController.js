@@ -1,5 +1,6 @@
 import bookUpload from "./bookUpload.js";
 import sendNewsLetter from "./sendNewsLetter.js";
+import { uploadEvent, getEvents, getEventByID } from "./event.js";
 
 async function signup(req, res) {
   res.send("signup");
@@ -29,4 +30,7 @@ export {
   getReports,
   bookUpload,
   sendNewsLetter,
+  uploadEvent,
+  getEvents,
+  getEventByID,
 };
