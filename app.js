@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import path from "path";
 import express from "express";
-import dotenv from "dotenv";
+
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
@@ -18,7 +21,7 @@ import libraryRouter from "./routers/libraryRouter.js";
 import { commonErrorHandler, notFoundHandler } from "./middlewares/errors.js";
 
 const app = express();
-dotenv.config();
+
 
 // Creating Necessary Directories
 configDir();
