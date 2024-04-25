@@ -5,8 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=development nodemon app.js",
-    "prod": "NODE_ENV=production node app.js"
+    "start": "set NODE_ENV=development & nodemon app.js",
+    "prod": " set NODE_ENV=production & node app.js"
   },
   "author": "Rejuyan Ahmed",
   "license": "ISC",
