@@ -1,7 +1,7 @@
 import Event from "../../models/event.js";
 
 async function uploadEvent(req, res) {
-  //   console.log(req.body, req.files);
+     console.log(req.body, req.file);
   try {
     const { name, description, date } = req.body;
 

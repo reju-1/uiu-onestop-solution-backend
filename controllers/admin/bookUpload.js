@@ -1,7 +1,7 @@
 import Book from "../../models/book.js";
 
 async function bookUpload(req, res) {
-  //   console.log(req.body, req.files);
+     console.log(req.body, req.files);
   try {
     const { name, description } = req.body;
 

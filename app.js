@@ -3,6 +3,7 @@ dotenv.config();
 
 import path from "path";
 import express from "express";
+import cors from 'cors'
 
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -38,6 +39,11 @@ async function main() {
 // Request parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("*", cors({
+  origin : true,
+  credentials : true
+}))
 
 // Set view engine
 app.set("view engine", "ejs");
