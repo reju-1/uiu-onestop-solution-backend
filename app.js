@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
@@ -31,6 +32,9 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL);
   console.log("mondoDb connected successfully");
 }
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Request parsers
 app.use(express.json());
