@@ -16,9 +16,9 @@ async function sendNewsLetter(req, res) {
 
   let mailOptions = {
     from: process.env.EMAIL_AC,
-    to: ["rahmed1445@gmail.com"],
+    to: ["rahmed1445@gmail.com", "asif212032@bscse.uiu.ac.bd"],
     subject: subject,
-    text: content,
+    html: content,
     attachments: attachmentObject || [],
   };
 
