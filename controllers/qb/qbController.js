@@ -17,7 +17,7 @@ async function handleUpload(req, res) {
       year: year,
       department: department,
 
-      path: req.file.path,
+      path: req.file.path.replace(/^public\//, ''),
       hash: req.hash,
       status: "pending",
     });

@@ -9,7 +9,7 @@ async function uploadEvent(req, res) {
       name: name,
       description: description,
       date: date,
-      logo: req.file.path,
+      logo: req.file.path.replace(/^public\//, ''),
     });
 
     await newEvent.save();

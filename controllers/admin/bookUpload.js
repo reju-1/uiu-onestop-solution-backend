@@ -13,8 +13,8 @@ async function bookUpload(req, res) {
     const newBook = new Book({
       name: name,
       description: description,
-      path: firstBook.path,
-      logo: firstLogo.path,
+      path: firstBook.path.replace(/^public\//, ''),
+      logo: firstLogo.path.replace(/^public\//, ''),
     });
 
     await newBook.save();
