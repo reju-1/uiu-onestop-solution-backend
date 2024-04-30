@@ -50,7 +50,7 @@ async function compareHash(req, res, next) {
         }
       });
 
-      next("The Question is already exit in our Database");
+      res.status(406).json({ message: 'The Question is already exit' });
     } else {
       next();
     }

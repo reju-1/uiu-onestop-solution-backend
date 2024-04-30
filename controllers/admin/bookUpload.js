@@ -11,29 +11,14 @@ async function bookUpload(req, res) {
     } = req.files;
 
 
-    // remove public from the url
-
-
-    const logo = firstLogo.path;
-  
-    const modifiedString = logo.replace(/^public\\/, "");
-
-    const newLogoUrl = `${process.env.SERVER_URL}/${modifiedString}`;
-
-
-    const document = firstBook.path;
-  
-    const modifiedDoc = document.replace(/^public\\/, "");
-
-    const newDocUrl = `${process.env.SERVER_URL}/${modifiedDoc}`;
-
+   
 
 
     const newBook = new Book({
       name: name,
       description: description,
-      path: newDocUrl,
-      logo: newLogoUrl,
+      path: firstBook.path.replace(/^public\//, ''),
+      logo: firstLogo.path.replace(/^public\//, ''),
     });
 
     await newBook.save();

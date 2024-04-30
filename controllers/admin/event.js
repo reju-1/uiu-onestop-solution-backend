@@ -5,17 +5,11 @@ async function uploadEvent(req, res) {
   try {
     const { name, description, date } = req.body;
 
-    const logo = req.file.path;
-  
-    const modifiedString = logo.replace(/^public\\/, "");
-
-    const newLogoUrl = `${process.env.SERVER_URL}/${modifiedString}`;
-
     const newEvent = new Event({
       name: name,
       description: description,
       date: date,
-      logo: newLogoUrl,
+      logo: req.file.path.replace(/^public\//, ''),
     });
 
     await newEvent.save();

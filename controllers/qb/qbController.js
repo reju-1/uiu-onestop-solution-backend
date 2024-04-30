@@ -17,17 +17,17 @@ async function handleUpload(req, res) {
       year: year,
       department: department,
 
-      path: req.file.path,
+      path: req.file.path.replace(/^public\//, ""),
       hash: req.hash,
       status: "pending",
     });
 
     let resp = await newQuestion.save();
 
-    res.json({ message: "File uploaded successfully" });
+    res.status(200).json({ message: "File uploaded successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error while saving in Database");
+    res.status(500).json({ error: "Error while saving in Database" });
   }
 }
 
