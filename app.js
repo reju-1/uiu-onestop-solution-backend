@@ -36,6 +36,9 @@ async function main() {
   console.log("mondoDb connected successfully");
 }
 
+// Enable CORS for all routes
+
+
 // Request parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

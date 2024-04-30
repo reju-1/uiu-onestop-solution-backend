@@ -1,15 +1,21 @@
 import Event from "../../models/event.js";
 
 async function uploadEvent(req, res) {
-     console.log(req.body, req.file);
+   //  console.log(req.body, req.file);
   try {
     const { name, description, date } = req.body;
+
+    const logo = req.file.path;
+  
+    const modifiedString = logo.replace(/^public\\/, "");
+
+    const newLogoUrl = `${process.env.SERVER_URL}/${modifiedString}`;
 
     const newEvent = new Event({
       name: name,
       description: description,
       date: date,
-      logo: req.file.path,
+      logo: newLogoUrl,
     });
 
     await newEvent.save();
@@ -43,4 +49,18 @@ async function getEventByID(req, res) {
   }
 }
 
-export { uploadEvent, getEvents, getEventByID };
+const deleteEvent = async (req, res) => {
+
+  try {
+    const deleteRes = await Event.findByIdAndDelete(req.params.id);
+
+    res.json(deleteRes)
+
+  }catch(err){
+    console.log("error deleting event " , err)
+    res.json({ error: "Invalid ObjsId or Event Not fount" });
+  }
+
+}
+
+export { uploadEvent, getEvents, getEventByID, deleteEvent };

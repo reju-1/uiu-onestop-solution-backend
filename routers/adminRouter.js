@@ -12,14 +12,19 @@ import {
   uploadEvent,
   getEvents,
   getEventByID,
+  
 } from "../controllers/admin/adminController.js";
+
+import { deleteEvent } from "../controllers/admin/event.js";
+
+import { deleteBook, getAllBooks } from "../controllers/admin/bookUpload.js";
 
 // External imports
 import configureMulter from "../middlewares/multerMiddleware.js";
 
 const router = express.Router();
 
-router.post("/signup", signup);
+router.post("/signup",configureMulter("public/uploads/admin").single("photo"),signup);
 router.get("/login", login);
 
 router.get("/review-qb", reviewQB);
@@ -43,6 +48,12 @@ router.post(
   bookUpload
 );
 
+router.get("/book", getAllBooks)
+router.delete("/book/:id", deleteBook)
+
+
+
+
 router.post(
   "/event",
   configureMulter("public/uploads/events").single("logo"),
@@ -50,5 +61,6 @@ router.post(
 );
 router.get("/event", getEvents);
 router.get("/event/:id", getEventByID);
+router.delete("/event/:id", deleteEvent);
 
 export default router;
