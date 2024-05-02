@@ -24,7 +24,7 @@ import configureMulter from "../middlewares/multerMiddleware.js";
 
 const router = express.Router();
 
-router.post("/signup",configureMulter("public/uploads/admin").single("photo"),signup);
+router.post("/signup",signup);
 router.get("/login", login);
 
 router.get("/review-qb", reviewQB);
