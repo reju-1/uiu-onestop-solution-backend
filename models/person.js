@@ -22,6 +22,12 @@ const personSchema = new mongoose.Schema({
     type: Number,
     default: 50,
   },
+
+  newsletterType: {
+    type: String,
+    enum: ["all", "essential"],
+    default: "all",
+  },
 });
 
 const Person = mongoose.model("Person", personSchema);

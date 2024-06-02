@@ -1,8 +1,20 @@
 import transporter from "../../utilities/mailer.js";
+import Person from "../../models/person.js";
 
 async function sendNewsLetter(req, res) {
   const { subject, content, category } = req.body;
   const files = req.files;
+
+  //category value:  "all-type, essential-type, app-forum, debate-club"
+  let query;
+  if (category.includes("all")) {
+    query = "all";
+  } else if (category.includes("essential")) {
+    query = "essential";
+  }
+
+  const usersEmail = await Person.find({ newsletterType: query }, "email");
+  const emailsArray = usersEmail.map((item) => item.email);
 
   let attachmentObject = [];
 
@@ -16,7 +28,7 @@ async function sendNewsLetter(req, res) {
 
   let mailOptions = {
     from: process.env.EMAIL_AC,
-    to: ["rahmed1445@gmail.com", "asif212032@bscse.uiu.ac.bd", "sidratul@cse.uiu.ac.bd"],
+    to: emailsArray,
     subject: subject,
     html: content,
     attachments: attachmentObject || [],
